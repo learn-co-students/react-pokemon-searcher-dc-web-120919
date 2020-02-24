@@ -7,14 +7,21 @@ class PokemonCollection extends React.Component {
   constructor(){
     super();
     this.state = {
-      pokemon: []
+      pokemon: [],
+      newPoke: {}
     }
   }
 
   componentDidMount= ()=>{
 
     console.log('fetching pokes')
+    this.setState({
+      newPoke: this.props.newPoke,
+    })
     this.fetchPokemon()
+  }
+
+  componentDidUpdate = () => {
   }
 
   fetchPokemon = () => {
@@ -56,7 +63,7 @@ class PokemonCollection extends React.Component {
     return (
       <Card.Group itemsPerRow={6}>
         <h1><p>Pokemon Collection</p></h1><br></br>
-        {this.pokemonSearcher().map(pokemon => <PokemonCard pokemonInfo={pokemon} key={pokemon.id}></PokemonCard>)}
+        {this.pokemonSearcher().map(pokemon => <PokemonCard pokemonInfo={pokemon} key={pokemon.id + pokemon.name}></PokemonCard>)}
       </Card.Group>
     )
   }
