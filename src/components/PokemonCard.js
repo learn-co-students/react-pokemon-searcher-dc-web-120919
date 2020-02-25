@@ -1,25 +1,28 @@
 import React from 'react'
+import CardFront from './CardFront'
+import CardBack from './CardBack'
 import { Card } from 'semantic-ui-react'
 
 class PokemonCard extends React.Component {
+    constructor(){
+      super()
+      this.state={toggle: true}
+    }
+   
+
+
+  flipCard = () => {
+   let toggle = this.state.toggle
+   this.setState({toggle: !toggle})
+  }
   render() {
+   
     return (
-      <Card>
-        <div>
-          <div className="image">
-            <img alt="oh no!" />
-          </div>
-          <div className="content">
-            <div className="header">POKEMON NAME HERE</div>
-          </div>
-          <div className="extra content">
-            <span>
-              <i className="icon heartbeat red" />
-              POKEMON HP HERE hp
-            </span>
-          </div>
-        </div>
-      </Card>
+      <div >
+       {this.state.toggle ?
+        <CardFront pokemonObj={this.props.pokemonObj} flipCard={this.flipCard}/>:
+        <CardBack pokemonObj={this.props.pokemonObj} flipCard={this.flipCard}/>}
+      </div>
     )
   }
 }
